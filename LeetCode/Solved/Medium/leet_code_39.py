@@ -1,14 +1,17 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        ret  = []
-        for i, num in enumerate(candidates):
-            j = 1
-            while num * j <= target:
-                base = [num] * j
-                others = []
-                if i != len(candidates) - 1 or target - num != 0:
-                    others = self.combinationSum(candidates[i + 1:], target - num * j)
-                if num * j == target: ret.append(base)
-                ret.extend([base + other for other in others])
-                j += 1
-        return ret
+        candidates.sort()
+        return self.bfs(candidates, 0, target, [])
+        
+    
+    
+    def bfs(self, candidates, start, target, path):
+        if target < 0:
+            return []
+        if target == 0:
+            return [path]
+        paths = []
+        for i in range(start, len(candidates)):
+            if target >= candidates[i]:
+                paths.extend(self.bfs(candidates, i, target - candidates[i], path + [candidates[i]]))
+        return paths
