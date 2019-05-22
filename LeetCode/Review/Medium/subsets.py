@@ -3,4 +3,4 @@ class Solution:
         if not nums:
             return [[]]
         subs = self.subsets(nums[1:])
-        return [[nums[0]] + sub for sub in subs] + subs
+        return [[nums[0]] + sub for sub in subs] + subs 
