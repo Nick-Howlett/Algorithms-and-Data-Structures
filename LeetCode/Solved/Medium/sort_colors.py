@@ -17,3 +17,4 @@ class Solution:
           else:
             current += 1
         
+
